@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class HourlyWeatherForecast extends StatelessWidget {
-  const HourlyWeatherForecast({super.key});
+  final String time;
+  final double speed;
+  final dynamic icon;
+  const HourlyWeatherForecast(
+      {super.key,
+      required this.time,
+      required this.speed,
+      this.icon = Icons.cloud});
 
   @override
   Widget build(BuildContext context) {
@@ -11,20 +18,20 @@ class HourlyWeatherForecast extends StatelessWidget {
         width: 100,
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "3:30",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              time,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Icon(
-              Icons.cloud,
+              icon,
               size: 36,
             ),
             Text(
-              "Humidity",
-              style: TextStyle(fontSize: 14),
+              speed.toStringAsFixed(2),
+              style: const TextStyle(fontSize: 14),
             )
           ],
         ),

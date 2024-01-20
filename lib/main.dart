@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(useMaterial3: true).copyWith(
           appBarTheme:
               const AppBarTheme(color: Color.fromARGB(255, 84, 190, 86))),
+      // const AppBarTheme(color: Color.fromARGB(255, 84, 190, 86))),
       home: const WeatherAppScreen(),
     );
   }

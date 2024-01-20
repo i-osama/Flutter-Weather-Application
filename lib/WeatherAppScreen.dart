@@ -12,6 +12,7 @@ class WeatherAppScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // elevation: 1,
         title: const Text(
           AppName,
           style: TextStyle(
@@ -110,14 +111,24 @@ class WeatherAppScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  HourlyWeatherForecast(),
-                  HourlyWeatherForecast(),
-                  HourlyWeatherForecast(),
-                  HourlyWeatherForecast(),
-                  HourlyWeatherForecast(),
-                  HourlyWeatherForecast(),
-                  HourlyWeatherForecast(),
-                  HourlyWeatherForecast(),
+                  HourlyWeatherForecast(
+                    time: "9:20",
+                    speed: 1200.2323,
+                    icon: Icons.snowing,
+                  ),
+                  HourlyWeatherForecast(time: "10:20", speed: 400.2323),
+                  HourlyWeatherForecast(
+                    time: "11:20",
+                    speed: 600.2323,
+                    icon: Icons.water,
+                  ),
+                  HourlyWeatherForecast(time: "12:20", speed: 200.2323),
+                  HourlyWeatherForecast(
+                    time: "1:20",
+                    speed: 800.2323,
+                    icon: Icons.waves,
+                  ),
+                  HourlyWeatherForecast(time: "2:20", speed: 100.2323),
                 ],
               ),
             ),
@@ -130,8 +141,22 @@ class WeatherAppScreen extends StatelessWidget {
 
             const SizedBox(height: 8),
             const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                AdditionalInformation(),
+                AdditionalInformation(
+                  situation: "Humidity",
+                  amount: 65.99,
+                ),
+                AdditionalInformation(
+                  situation: "Wind speed",
+                  amount: 90.01,
+                  icon: Icons.wind_power,
+                ),
+                AdditionalInformation(
+                  situation: "Pressure",
+                  amount: 25.35,
+                  icon: Icons.heat_pump,
+                ),
               ],
             )
           ],
