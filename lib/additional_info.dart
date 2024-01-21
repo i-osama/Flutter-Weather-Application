@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AdditionalInformation extends StatelessWidget {
   final String situation;
-  final double amount;
+  final dynamic amount;
   final dynamic icon;
   const AdditionalInformation(
       {super.key,
