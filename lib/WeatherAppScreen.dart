@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/additional_info.dart';
 import 'package:weather_app/hourly_weather_forecast.dart';
 import 'package:http/http.dart' as http;
@@ -167,37 +169,56 @@ class _WeatherAppScreenState extends State<WeatherAppScreen> {
                   height: 10,
                 ),
 
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (int i = 0; i < 5; i++)
-                        HourlyWeatherForecast(
-                            time: data['list'][i + 1]['dt'].toString(),
-                            speed: data['list'][i + 1]['wind']['speed'],
-                            icon: iconSelector(
-                                data['list'][i + 1]['weather'][0]['main']))
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: [
+                //       for (int i = 0; i < 5; i++)
+                //         HourlyWeatherForecast(
+                //             time: data['list'][i + 1]['dt'].toString(),
+                //             speed: data['list'][i + 1]['wind']['speed'],
+                //             icon: iconSelector(
+                //                 data['list'][i + 1]['weather'][0]['main']))
 
-                      // HourlyWeatherForecast(
-                      //   time: "9:20",
-                      //   speed: 1200.2323,
-                      //   icon: Icons.snowing,
-                      // ),
-                      // HourlyWeatherForecast(time: "10:20", speed: 400.2323),
-                      // HourlyWeatherForecast(
-                      //   time: "11:20",
-                      //   speed: 600.2323,
-                      //   icon: Icons.water,
-                      // ),
-                      // HourlyWeatherForecast(time: "12:20", speed: 200.2323),
-                      // HourlyWeatherForecast(
-                      //   time: "1:20",
-                      //   speed: 800.2323,
-                      //   icon: Icons.waves,
-                      // ),
-                      // HourlyWeatherForecast(time: "2:20", speed: 100.2323),
-                    ],
-                  ),
+                //       // HourlyWeatherForecast(
+                //       //   time: "9:20",
+                //       //   speed: 1200.2323,
+                //       //   icon: Icons.snowing,
+                //       // ),
+                //       // HourlyWeatherForecast(time: "10:20", speed: 400.2323),
+                //       // HourlyWeatherForecast(
+                //       //   time: "11:20",
+                //       //   speed: 600.2323,
+                //       //   icon: Icons.water,
+                //       // ),
+                //       // HourlyWeatherForecast(time: "12:20", speed: 200.2323),
+                //       // HourlyWeatherForecast(
+                //       //   time: "1:20",
+                //       //   speed: 800.2323,
+                //       //   icon: Icons.waves,
+                //       // ),
+                //       // HourlyWeatherForecast(time: "2:20", speed: 100.2323),
+                //     ],
+                //   ),
+                // ),
+                SizedBox(
+                  height: 120,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 6,
+                      itemBuilder: (context, index) {
+                        final hourlyforecast =
+                            DateTime.parse(data['list'][index + 1]['dt_txt']);
+
+                        return HourlyWeatherForecast(
+                            // time: data['list'][index + 1]['dt'].toString(),
+                            time: DateFormat.Hm()
+                                .format(hourlyforecast)
+                                .toString(),
+                            speed: data['list'][index + 1]['wind']['speed'],
+                            icon: iconSelector(
+                                data['list'][index + 1]['weather'][0]['main']));
+                      }),
                 ),
                 const SizedBox(height: 12),
                 // ---- Additional information
