@@ -25,7 +25,7 @@ class _WeatherAppScreenState extends State<WeatherAppScreen> {
     getWeatherData();
   }
 
-  Future getWeatherData() async {
+  Future<Map<String, dynamic>> getWeatherData() async {
     try {
       String city = "Korea";
       final response = await http.get(Uri.parse(
@@ -60,7 +60,9 @@ class _WeatherAppScreenState extends State<WeatherAppScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                print("Pressed");
+                setState(() {
+                  getWeatherData();
+                });
               },
               icon: const Icon(
                 Icons.refresh,
@@ -212,7 +214,7 @@ class _WeatherAppScreenState extends State<WeatherAppScreen> {
 
                         return HourlyWeatherForecast(
                             // time: data['list'][index + 1]['dt'].toString(),
-                            time: DateFormat.Hm()
+                            time: DateFormat('j')
                                 .format(hourlyforecast)
                                 .toString(),
                             speed: data['list'][index + 1]['wind']['speed'],
